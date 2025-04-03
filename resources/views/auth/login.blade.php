@@ -1,73 +1,114 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<div class="flex flex-col md:flex-row min-h-screen w-full overflow-x-hidden overflow-y-hidden">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+    <!-- Left Side (Professional Branding) -->
+    <div class="md:w-1/2 w-full flex flex-col justify-center bg-gradient-to-br from-indigo-900 to-purple-700 text-white p-10">
+      <p class="ml-0 mt-2 text-6xl md:text-7xl lg:text-8xl font-bold text-white text-left">Welcome <br>Back!</p>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+        
+        <!-- Added Role Management Information -->
+        <div class="mt-12 bg-white/10 backdrop-blur p-6 rounded-xl">
+            <h3 class="text-2xl font-semibold mb-4">Role Management System</h3>
+            <div class="space-y-4">
+                <div class="flex items-start">
+                    <div class="p-3 rounded-full bg-green-500 mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">User</h4>
+                        <p class="text-sm text-gray-200">Submit and track support tickets</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="p-3 rounded-full bg-yellow-500 mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Support</h4>
+                        <p class="text-sm text-gray-200">Resolve tickets and communicate with users</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start">
+                    <div class="p-3 rounded-full bg-red-500 mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">Admin</h4>
+                        <p class="text-sm text-gray-200">Manage users, tickets and system settings</p>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Right Side (Larger Login Form) -->
+    <div class="md:w-1/2 w-full flex items-center justify-center bg-gray-50 px-6 md:px-16 py-10 relative">
+        <div class="w-full max-w-md bg-white p-8 md:p-10 shadow-xl rounded-lg z-10 border border-gray-100">
+            <h2 class="text-2xl md:text-3xl font-semibold text-indigo-800 text-center">{{ __('Login') }}</h2>
+            <p class="text-center text-gray-600 mt-2">Access your account securely.</p>
+
+            <form method="POST" action="{{ route('login') }}" class="mt-6">
+                @csrf
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">{{ __('Username') }}</label>
+                    <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus 
+                        class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    @error('email')
+                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mt-4">
+                    <label for="password" class="block text-sm font-medium text-gray-700">{{ __('Password') }}</label>
+                    <input id="password" type="password" name="password" required autocomplete="current-password" 
+                        class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    @error('password')
+                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mt-4">
+                    <label for="role" class="block text-sm font-medium text-gray-700">{{ __('Login As') }}</label>
+                    <select id="role" name="role" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="user">User</option>
+                        <option value="support">Support</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+
+                <div class="mt-4 flex items-center">
+                    <input class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                    <label for="remember" class="ml-2 text-sm text-gray-600">{{ __('Remember Me') }}</label>
+                    
+                    @if (Route::has('password.request'))
+                        <a class="ml-auto text-sm text-indigo-600 hover:text-indigo-500" href="{{ route('password.request') }}">
+                            {{ __('Forgot Password?') }}
+                        </a>
+                    @endif
+                </div>
+
+                <div class="mt-6">
+                    <button type="submit" class="w-full px-4 py-3 text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-150">
+                        {{ __('Sign In') }}
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Improved overlapping effect -->
+        <div class="hidden md:block absolute -left-10 top-1/2 transform -translate-y-1/2 w-24 h-80 bg-indigo-100 rounded-full opacity-50"></div>
+        <div class="hidden md:block absolute -right-10 top-1/3 transform -translate-y-1/2 w-32 h-32 bg-purple-100 rounded-full opacity-60"></div>
+        <div class="hidden md:block absolute right-20 bottom-20 w-16 h-16 bg-yellow-100 rounded-full opacity-70"></div>
     </div>
 </div>
 @endsection
